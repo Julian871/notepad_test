@@ -6,6 +6,7 @@ import { CustomTypeOrmModule } from './libs/typeorm/typeorm.module';
 import { AuthModule } from './features/auth/auth.module';
 import { CustomSwaggerModule } from './swagger/swagger.module';
 import { APP_PIPE } from '@nestjs/core';
+import { CustomMailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { APP_PIPE } from '@nestjs/core';
     UserModule,
     AuthModule,
     CustomSwaggerModule,
+    CustomMailModule,
   ],
   controllers: [AppController],
   providers: [

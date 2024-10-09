@@ -11,6 +11,7 @@ import { CryptService } from '../../services/crypt.services';
 import { User } from '../../../../libs/typeorm/entities/user.entity';
 import { Password } from '../../../../libs/typeorm/entities/password.entity';
 import { CreateUserModel } from '../../models/createUser.model';
+import { MailService } from '../../../../mail/mail.service';
 
 export class RegistrationCommand {
   constructor(public dto: RegistrationDto) {}
@@ -24,6 +25,7 @@ export class RegistrationHandler
     private readonly userRepository: UserRepository,
     private readonly userQueryRepository: UserQueryRepository,
     private readonly cryptService: CryptService,
+    private readonly mailService: MailService,
   ) {}
 
   async execute(command: RegistrationCommand): Promise<CreateUserModel> {
@@ -71,7 +73,7 @@ export class RegistrationHandler
 
   async createAndSendConfirmCode(email: string): Promise<string> {
     const code = uuidv4();
-    //todo: make send mail
+    await this.mailService.sendConfirmCode(email, code);
     return code;
   }
 }
