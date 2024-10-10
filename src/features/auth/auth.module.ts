@@ -6,10 +6,12 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { UserModule } from '../users/user.module';
 import { CryptService } from './services/crypt.services';
 import { MailService } from '../../mail/mail.service';
+import { strategies } from './strategies/strategies';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
-  imports: [CustomTypeOrmModule, CqrsModule, UserModule],
+  imports: [CustomTypeOrmModule, CqrsModule, PassportModule, UserModule],
   controllers: [AuthController],
-  providers: [...handlers, CryptService, MailService],
+  providers: [...handlers, CryptService, MailService, ...strategies],
 })
 export class AuthModule {}

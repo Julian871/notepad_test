@@ -15,6 +15,7 @@ export class UserQueryRepository {
       .createQueryBuilder('user')
       .where('email.address = :email', { email })
       .leftJoinAndSelect('user.email', 'email')
+      .leftJoinAndSelect('user.password', 'password')
       .getOne();
   }
 }
